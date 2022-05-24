@@ -1,2 +1,10 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<h1>Random Minecraft</h1>
+<p>Helper to keep track of your randomized Minecraft playthrough.</p>
+
+<form method="post">
+	<label>
+		Name of Playthrough
+		<input type="text" name="playthrough"/>
+	</label>
+	<button type="submit">open</button>
+</form>
