@@ -3,7 +3,7 @@
 	export let chains: string[][];
 </script>
 
-<h1>{code}</h1>
+<h1>Playthrough: {code}</h1>
 
 <form method="post" class="mb-8">
 	<label>
