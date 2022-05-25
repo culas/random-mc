@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-auto';
+import vercel from '@sveltejs/adapter-vercel';
 import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -11,7 +11,7 @@ const config = {
 
 	kit: {
 		methodOverride: { allowed: ['DELETE'] },
-		adapter: adapter()
+		adapter: vercel()
 	},
 };
 
