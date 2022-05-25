@@ -1,12 +1,14 @@
-import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
+import { idString } from '$lib/validation';
+import type { RequestEvent } from '@sveltejs/kit';
 
 export async function post({ request }: RequestEvent) {
 	const playthrough = (await request.formData()).get('playthrough');
-	if (validCode(playthrough)) {
+	const code = idString(playthrough);
+	if (validCode(code)) {
 		return {
 			status: 303,
 			headers: {
-				location: `/playthrough/${playthrough}`
+				location: `/playthrough/${code}`
 			}
 		};
 	} else {
