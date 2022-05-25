@@ -15,13 +15,20 @@
 <h2>Playthrough: {code}</h2>
 
 <form method="post" class="mb-8">
-	<label>
+	<label class="w-1/4 mr-2">
 		<span>block</span>
-		<input type="text" name="block" placeholder="block" autofocus list="block-datalist" />
+		<input
+			type="text"
+			name="block"
+			placeholder="block"
+			autofocus
+			list="block-datalist"
+			class="w-full"
+		/>
 	</label>
-	<label>
+	<label class="w-1/4 mr-2">
 		<span>drop</span>
-		<input type="text" name="drop" placeholder="dropped item" list="drop-datalist" />
+		<input type="text" name="drop" placeholder="dropped item" list="drop-datalist" class="w-full" />
 	</label>
 	<button type="submit">add link</button>
 </form>
@@ -38,10 +45,15 @@
 	{/each}
 </datalist>
 
-<form class="relative inline-block mb-8">
-	<label>
+<form class="relative mb-8 w-1/4">
+	<label class="w-full">
 		<span>search</span>
-		<input type="text" placeholder="enter search term to filter" bind:value={search} />
+		<input
+			type="text"
+			placeholder="enter search term to filter"
+			bind:value={search}
+			class="w-full"
+		/>
 	</label>
 	<svg
 		class="w-4 absolute bottom-3 right-2 text-neutral-300"
@@ -104,7 +116,7 @@
 		font-size: x-small;
 		text-align: center;
 		border-radius: 100%;
-		background-color: rgba(255, 255, 255, .25);
+		background-color: rgba(255, 255, 255, 0.25);
 	}
 
 	section > div:first-child .arrow-l,
