@@ -3,7 +3,7 @@
 </script>
 
 <main class="container mx-auto flex-grow">
-	<h1><a href="/">Random Minecraft</a></h1>
+	<h1><a href="/">Random Minecraft Tracker</a> <span class="inline-block rounded align-top bg-lime-400 text-white text-bold text-xs text-center px-1">BETA</span> </h1>
 	<slot />
 </main>
 

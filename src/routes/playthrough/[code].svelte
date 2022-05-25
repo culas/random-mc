@@ -41,7 +41,7 @@
 <form class="relative inline-block mb-8">
 	<label>
 		<span>search</span>
-		<input type="text" placeholder="enter search term" bind:value={search} />
+		<input type="text" placeholder="enter search term to filter" bind:value={search} />
 	</label>
 	<svg
 		class="w-4 absolute bottom-3 right-2 text-neutral-300"
@@ -67,16 +67,15 @@
 			{#if chain}
 				{#each chain as item}
 					<div
-						class="p-2 pl-4 relative rounded shadow-lg hover:shadow-xl transition duration-150 ease-in-out bg-neutral-900 text-white whitespace-nowrap {filtered &&
-						item.includes(search)
-							? 'highlight'
-							: ''}"
+						class="p-2 pl-4 relative rounded shadow-lg hover:shadow-xl transition duration-150 ease-in-out bg-neutral-900 text-white whitespace-nowrap"
+						class:bg-yellow-600={filtered && item.includes(search)}
 					>
 						<div
-							class="arrow-l absolute left-0 top-3 border-solid border-l-white border-l-8 border-y-transparent border-y-8 border-r-0"
+							class="arrow-l absolute left-0 top-3 border-solid border-l-white border-l-8 border-y-transparent border-y-8 border-r-0 transition duration-150 ease-in-out"
 						/>
 						<div
-							class="arrow-r absolute -right-2 top-3 border-solid border-l-neutral-900 border-l-8 border-y-transparent border-y-8 border-r-0"
+							class="arrow-r absolute -right-2 top-3 border-solid border-l-neutral-900 border-l-8 border-y-transparent border-y-8 border-r-0 transition duration-150 ease-in-out"
+							class:border-l-yellow-600={filtered && item.includes(search)}
 						/>
 						<span>{item}</span>
 						<form method="post" action="?_method=DELETE" class="inline-block">
@@ -105,13 +104,11 @@
 		font-size: x-small;
 		text-align: center;
 		border-radius: 100%;
+		background-color: rgba(255, 255, 255, .25);
 	}
 
-	.highlight {
-		background-color: darkgoldenrod;
-	}
-
-	.highlight .arrow-r {
-		border-left-color: darkgoldenrod;
+	section > div:first-child .arrow-l,
+	section > div:last-child .arrow-r {
+		display: none;
 	}
 </style>

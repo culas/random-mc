@@ -1,9 +1,11 @@
-<p>Helper to keep track of your randomized Minecraft playthrough.</p>
+<p class="mb-4">A helper to keep track of the item drops in your randomized Minecraft playthrough.</p>
 
 <form method="post">
-	<label>
+	<label class="w-1/2 mr-2">
 		<span>Name of Playthrough</span>
-		<input type="text" name="playthrough" />
+		<input type="text" name="playthrough" placeholder="Enter a unique name" class="w-full" />
 	</label>
 	<button type="submit">open</button>
 </form>
+<p class="text-xs mt-8">The name will be stripped of special characters and white space. Anyone knowing the name can access and modify your playthrough data. Enter a new name to create a new playthrough, or open an existing one with the corresponding name.</p>
+<p class="text-xs mt-4">This app is very much a work in progress, bugs are to be expected. :)</p>
