@@ -8,6 +8,8 @@
 	$: filteredChains = filtered
 		? chains.filter((chain) => chain.some((item) => item.includes(search)))
 		: chains;
+	$: chainStarts = chains.map(([first]) => first);
+	$: chainEnds = chains.map((chain) => chain[chain.length - 1]);
 </script>
 
 <h2>Playthrough: {code}</h2>
@@ -15,14 +17,26 @@
 <form method="post" class="mb-8">
 	<label>
 		<span>block</span>
-		<input type="text" name="block" placeholder="block" autofocus />
+		<input type="text" name="block" placeholder="block" autofocus list="block-datalist" />
 	</label>
 	<label>
 		<span>drop</span>
-		<input type="text" name="drop" placeholder="dropped item" />
+		<input type="text" name="drop" placeholder="dropped item" list="drop-datalist" />
 	</label>
 	<button type="submit">add link</button>
 </form>
+
+<datalist id="block-datalist">
+	{#each chainEnds as end}
+		<option value={end} />
+	{/each}
+</datalist>
+
+<datalist id="drop-datalist">
+	{#each chainStarts as start}
+		<option value={start} />
+	{/each}
+</datalist>
 
 <form class="relative inline-block mb-8">
 	<label>
