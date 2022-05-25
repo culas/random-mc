@@ -23,7 +23,13 @@
 		<section>
 			{#if chain}
 				{#each chain as item}
-					<div>{item}</div>
+					<div>
+						{item}
+						<form method="post" action="?_method=DELETE">
+							<input type="text" hidden name="item" value={item} />
+							<button type="submit">X</button>
+						</form>
+					</div>
 				{/each}
 			{/if}
 		</section>

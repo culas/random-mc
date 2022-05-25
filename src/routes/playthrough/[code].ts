@@ -6,9 +6,7 @@ import type { MongoClient } from 'mongodb';
 
 export async function get({ params }: RequestEvent) {
 	const code = idString(params.code);
-	const dbConnection: MongoClient = await (clientPromise as Promise<MongoClient>);
-	const db = dbConnection.db();
-	const collection = db.collection('playthroughs');
+	const collection = await getCollection();
 	const { value: playthrough } = await collection.findOneAndUpdate(
 		{ code },
 		{ $setOnInsert: { code, chains: [] } },
@@ -26,13 +24,12 @@ export async function get({ params }: RequestEvent) {
 
 export async function post({ params, request }: RequestEvent) {
 	const code = idString(params.code);
-	const dbConnection: MongoClient = await clientPromise;
-	const db = dbConnection.db();
-	const collection = db.collection('playthroughs');
-	const playthrough = (await collection.findOne({ code })) as Playthrough | null;
 	const formData = await request.formData();
-	const block = alphaNumericStringWithWhitespace(formData.get('block') as string);
-	const drop = alphaNumericStringWithWhitespace(formData.get('drop') as string);
+	const block = alphaNumericStringWithWhitespace(formData.get('block'));
+	const drop = alphaNumericStringWithWhitespace(formData.get('drop'));
+
+	const collection = await getCollection();
+	const playthrough = (await collection.findOne({ code }));
 
 	if (!playthrough || !block || !drop) {
 		return {
@@ -64,4 +61,46 @@ export async function post({ params, request }: RequestEvent) {
 		status: 200,
 		body: updatedPlaythrough
 	}
+}
+
+export async function del({ params, request }: RequestEvent) {
+	const code = idString(params.code);
+	const formData = await request.formData();
+	const itemToDelete = alphaNumericStringWithWhitespace(formData.get('item'));
+
+	const collection = await getCollection();
+	const playthrough = (await collection.findOne({ code }));
+
+	if (!playthrough || !itemToDelete) {
+		return {
+			status: 404,
+			body: { error: 'Invalid data' }
+		}
+	}
+
+	playthrough.chains = playthrough.chains
+		.map(chain => chain.filter(item => item !== itemToDelete))
+		.filter(chain => chain.length > 0);
+
+	const { value: updatedPlaythrough } = await collection.findOneAndUpdate(
+		{ code },
+		{ $set: { chains: playthrough.chains } },
+		{
+			returnDocument: 'after'
+		}
+	);
+
+	return {
+		status: 303,
+		headers: {
+			location: `/playthrough/${code}`
+		},
+		body: updatedPlaythrough
+	}
+}
+
+async function getCollection() {
+	const dbConnection: MongoClient = await clientPromise;
+	const db = dbConnection.db();
+	return db.collection<Playthrough>('playthroughs');
 }
