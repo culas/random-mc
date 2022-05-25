@@ -3,6 +3,7 @@
 </script>
 
 <main class="container mx-auto flex-grow">
+	<h1><a href="/">Random Minecraft</a></h1>
 	<slot />
 </main>
 

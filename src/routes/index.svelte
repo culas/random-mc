@@ -1,4 +1,3 @@
-<h1>Random Minecraft</h1>
 <p>Helper to keep track of your randomized Minecraft playthrough.</p>
 
 <form method="post">

@@ -10,12 +10,12 @@
 		: chains;
 </script>
 
-<h1>Playthrough: {code}</h1>
+<h2>Playthrough: {code}</h2>
 
 <form method="post" class="mb-8">
 	<label>
 		<span>block</span>
-		<input type="text" name="block" placeholder="block" />
+		<input type="text" name="block" placeholder="block" autofocus />
 	</label>
 	<label>
 		<span>drop</span>
