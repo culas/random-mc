@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	/* TYPOGRAPHY */
+	h1 {
+		@apply text-2xl font-bold uppercase mt-2 mb-4;
+	}
+
+	h2 {
+		@apply text-xl font-bold mt-1 mb-2;
+	}
+
+	p {
+		@apply mb-2;
+	}
+
+	/* FORM ELEMENTS */
+
+	form label {
+		@apply inline-block text-neutral-600;
+	}
+
+	form label span {
+		@apply block;
+	}
+
+	button[type=submit] {
+		@apply p-2 bg-neutral-600 text-white font-medium text-base uppercase rounded shadow-md hover:bg-neutral-700 hover:shadow-lg focus:bg-neutral-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-neutral-800 active:shadow-lg transition duration-150 ease-in-out;
+	}
+
+	input[type=text] {
+		@apply p-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-neutral-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-neutral-700 focus:outline-none;
+	}
+
+}
