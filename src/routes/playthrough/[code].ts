@@ -1,9 +1,11 @@
 import clientPromise from '$lib/db';
 import type { Playthrough } from '$lib/models/playthrough.model';
+import { alphaNumericStringWithWhitespace, idString } from '$lib/validation';
 import type { RequestEvent } from '@sveltejs/kit';
 import type { MongoClient } from 'mongodb';
 
-export async function get({ params: { code } }: RequestEvent) {
+export async function get({ params }: RequestEvent) {
+	const code = idString(params.code);
 	const dbConnection: MongoClient = await (clientPromise as Promise<MongoClient>);
 	const db = dbConnection.db();
 	const collection = db.collection('playthroughs');
@@ -22,31 +24,31 @@ export async function get({ params: { code } }: RequestEvent) {
 	}
 }
 
-export async function post({ params: { code }, request }: RequestEvent) {
+export async function post({ params, request }: RequestEvent) {
+	const code = idString(params.code);
 	const dbConnection: MongoClient = await clientPromise;
 	const db = dbConnection.db();
 	const collection = db.collection('playthroughs');
 	const playthrough = (await collection.findOne({ code })) as Playthrough | null;
 	const formData = await request.formData();
-	const block = formData.get('block');
-	const drop = formData.get('drop');
+	const block = alphaNumericStringWithWhitespace(formData.get('block') as string);
+	const drop = alphaNumericStringWithWhitespace(formData.get('drop') as string);
 
-	if (!playthrough || !block || typeof block !== 'string' || !drop || typeof drop !== 'string') {
+	if (!playthrough || !block || !drop) {
 		return {
 			status: 404,
-			body: { error: 'Playthrough not found' }
+			body: { error: 'Invalid data' }
 		}
 	}
 
-	const chain = playthrough.chains.find(chain => chain.includes(block) || chain.includes(drop))
+	playthrough.chains = playthrough.chains.map(chain => {
+		if (chain[0] === drop) return [block, ...chain];
+		if (chain[chain.length - 1] === block) return [...chain, drop];
+		return chain;
+	});
 
-	if (chain) {
-		if (chain[0] === drop) {
-			chain.unshift(block);
-		} else if (chain[chain.length - 1] === block) {
-			chain.push(drop);
-		}
-	} else {
+	const containsElementsSomewhere = playthrough.chains.some(chain => chain.includes(block) || chain.includes(drop))
+	if (!containsElementsSomewhere) {
 		playthrough.chains.push([block, drop]);
 	}
 

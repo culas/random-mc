@@ -33,8 +33,9 @@
 <style>
 	section {
 		display: flex;
+		flex-wrap: wrap;
 		max-width: 100%;
-		overflow-x: auto;
+		overflow: hidden;
 	}
 
 	div {
