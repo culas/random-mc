@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { browser } from '$app/env';
-
+	import LoadingBar from '$lib/components/LoadingBar.svelte';
 	import '../app.css';
+
 	const version = browser
 		? document?.head.querySelector<HTMLMetaElement>('[name=version]')?.content ?? ''
 		: '';
 </script>
+
+<LoadingBar />
 
 <main class="container mx-auto px-4 flex-grow">
 	<h1>
