@@ -1,10 +1,11 @@
 {
 	"name": "random-mc",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
+		"prebuild": "sed -i -e \"s/%VERSION%/${npm_package_version}/\" src/app.html",
 		"preview": "svelte-kit preview",
 		"prepare": "svelte-kit sync",
 		"check": "svelte-check --tsconfig ./tsconfig.json",

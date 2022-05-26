@@ -1,5 +1,10 @@
-<script>
+<script lang="ts">
+	import { browser } from '$app/env';
+
 	import '../app.css';
+	const version = browser
+		? document?.head.querySelector<HTMLMetaElement>('[name=version]')?.content ?? ''
+		: '';
 </script>
 
 <main class="container mx-auto px-4 flex-grow">
@@ -13,4 +18,6 @@
 	<slot />
 </main>
 
-<footer class="text-center p-2 text-xs text-neutral-400">by celep</footer>
+<footer class="text-center p-2 text-xs text-neutral-400">
+	by celep, v{version}, <a href="https://github.com/culas/random-mc">GitHub</a>
+</footer>
