@@ -1,22 +1,12 @@
-# create-svelte
+# Random Minecraft Tracker
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A helper to keep track of the item drops in your randomized Minecraft playthrough. Inspired by [Osie's](https://www.twitch.tv/osie) streams based on the [Minecraft Randomizer](https://fasguy.net/minecraft_randomizer/).
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm init svelte
-
-# create a new project in my-app
-npm init svelte my-app
-```
+Built with [SvelteKit](https://kit.svelte.dev/) and a MongoDB database.
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Once you've cloned the project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
 npm run dev
@@ -25,14 +15,8 @@ npm run dev
 npm run dev -- --open
 ```
 
-## Building
+> Check out the [Svelte](https://svelte.dev/docs/) and [SvelteKit](https://kit.svelte.dev/docs/) Documentations
 
-To create a production version of your app:
+---
 
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+For full functionality you need to create `.env` file in the `src` directory with informations to connect to your MongoDB database. See `template.env` for reference.
