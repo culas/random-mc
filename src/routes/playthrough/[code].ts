@@ -38,20 +38,46 @@ export async function post({ params, request }: RequestEvent) {
 		}
 	}
 
-	playthrough.chains = playthrough.chains.map(chain => {
-		if (chain[0] === drop) return [block, ...chain];
-		if (chain[chain.length - 1] === block) return [...chain, drop];
-		return chain;
+	let merged = false;
+	let newChains: string[][] = [];
+	let modified: string[] | undefined;
+	playthrough.chains.forEach(chain => {
+		if (merged) {
+			newChains.push(chain);
+		} else {
+			if (modified) {
+				if (toPrepend(chain, drop)) {
+					modified.push(...chain.slice(1));
+					merged = true;
+				} else if (toAppend(chain, block)) {
+					modified.unshift(...chain.slice(0, -1))
+					merged = true;
+				} else {
+					newChains.push(chain);
+				}
+			} else {
+				if (toPrepend(chain, drop)) {
+					modified = [block, ...chain];
+				} else if (toAppend(chain, block)) {
+					modified = [...chain, drop];
+				} else {
+					newChains.push(chain);
+				}
+			}
+		}
 	});
+	if (modified) {
+		newChains.unshift(modified);
+	}
 
-	const containsElementsSomewhere = playthrough.chains.some(chain => chain.includes(block) || chain.includes(drop))
+	const containsElementsSomewhere = newChains.some(chain => chain.includes(block) || chain.includes(drop))
 	if (!containsElementsSomewhere) {
-		playthrough.chains.push([block, drop]);
+		newChains.unshift([block, drop]);
 	}
 
 	const { value: updatedPlaythrough } = await collection.findOneAndUpdate(
 		{ code },
-		{ $set: { chains: playthrough.chains } },
+		{ $set: { chains: newChains } },
 		{
 			returnDocument: 'after'
 		}
@@ -103,4 +129,12 @@ async function getCollection() {
 	const dbConnection: MongoClient = await clientPromise;
 	const db = dbConnection.db();
 	return db.collection<Playthrough>('playthroughs');
+}
+
+function toPrepend(chain: string[], drop: string): boolean {
+	return chain[0] === drop;
+}
+
+function toAppend(chain: string[], block: string): boolean {
+	return chain[chain.length - 1] === block;
 }
