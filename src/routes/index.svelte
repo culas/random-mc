@@ -1,16 +1,18 @@
 <script lang="ts">
+	import TextInput from '$lib/components/TextInput.svelte';
+
 	export let error: string;
 </script>
 
 <p class="mb-4">
-	A helper to keep track of the item drops in your randomized Minecraft playthrough. Inspired by <a href="https://www.twitch.tv/osie">Osie's</a> streams based on the <a href="https://fasguy.net/minecraft_randomizer/">Minecraft Randomizer</a>.
+	A helper to keep track of the item drops in your randomized Minecraft playthrough. Inspired by <a
+		href="https://www.twitch.tv/osie">Osie's</a
+	>
+	streams based on the <a href="https://fasguy.net/minecraft_randomizer/">Minecraft Randomizer</a>.
 </p>
 
-<form method="post">
-	<label class="w-3/4 sm:w-1/2 md:w-1/3 mr-2">
-		<span>Name of Playthrough</span>
-		<input type="text" name="playthrough" placeholder="Enter a unique name" class="w-full" />
-	</label>
+<form method="post" class="flex items-end gap-2 w-full sm:w-2/3 md:w-1/2 lg:w-1/3">
+	<TextInput label="Name of playthrough" name="playthrough" placeholder="Enter a unique name" />
 	<button type="submit" class="btn">open</button>
 </form>
 

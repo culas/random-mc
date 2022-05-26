@@ -1,6 +1,6 @@
-import clientPromise from '$lib/db';
+import clientPromise from '$lib/utils/db';
 import type { Playthrough } from '$lib/models/playthrough.model';
-import { alphaNumericStringWithWhitespace, idString } from '$lib/validation';
+import { alphaNumericStringWithWhitespace, idString } from '$lib/utils/validation';
 import type { RequestEvent } from '@sveltejs/kit';
 import type { MongoClient } from 'mongodb';
 

@@ -1,4 +1,4 @@
-import { idString } from '$lib/validation';
+import { idString } from '$lib/utils/validation';
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function post({ request }: RequestEvent) {

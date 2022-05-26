@@ -1,4 +1,6 @@
 <script lang="ts">
+	import TextInput from '$lib/components/TextInput.svelte';
+
 	export let code: string;
 	export let chains: string[][];
 	export let error: string;
@@ -15,39 +17,14 @@
 
 <h2>Playthrough: {code}</h2>
 
-<form method="post" class="mb-8">
-	<label class="mr-2 mb-2 block w-full sm:inline-block sm:w-1/4">
-		<span>block</span>
-		<input
-			type="text"
-			name="block"
-			placeholder="block"
-			autofocus
-			list="block-datalist"
-			class="w-full"
-		/>
-	</label>
-	<label class="mr-2 mb-2 block w-full sm:inline-block sm:w-1/4">
-		<span>drop</span>
-		<input type="text" name="drop" placeholder="dropped item" list="drop-datalist" class="w-full" />
-	</label>
+<form method="post" class="mb-8 flex items-end gap-2 w-full sm:w-3/4 xl:w-1/2">
+	<TextInput name="block" datalist={chainEnds} autofocus />
+	<TextInput name="drop" placeholder="dropped item" datalist={chainStarts} />
 	<button type="submit" class="btn">add link</button>
 	{#if error}
 		<p class="text-sm text-red-500">Error: {error}</p>
 	{/if}
 </form>
-
-<datalist id="block-datalist">
-	{#each chainEnds as end}
-		<option value={end} />
-	{/each}
-</datalist>
-
-<datalist id="drop-datalist">
-	{#each chainStarts as start}
-		<option value={start} />
-	{/each}
-</datalist>
 
 <form class="relative mb-8 w-full sm:w-1/2 xl:w-1/4">
 	<label class="w-full">
