@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SubmitButton from '$lib/components/SubmitButton.svelte';
 	import TextInput from '$lib/components/TextInput.svelte';
 
 	export let error: string;
@@ -13,7 +14,7 @@
 
 <form method="post" class="flex items-end gap-2 w-full sm:w-2/3 md:w-1/2 lg:w-1/3">
 	<TextInput label="Name of playthrough" name="playthrough" placeholder="Enter a unique name" />
-	<button type="submit" class="btn">open</button>
+	<SubmitButton>open</SubmitButton>
 </form>
 
 {#if error}

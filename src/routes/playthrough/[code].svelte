@@ -1,4 +1,6 @@
 <script lang="ts">
+	import DeleteButton from '$lib/components/DeleteButton.svelte';
+	import SubmitButton from '$lib/components/SubmitButton.svelte';
 	import TextInput from '$lib/components/TextInput.svelte';
 
 	export let code: string;
@@ -20,14 +22,14 @@
 <form method="post" class="mb-8 flex items-end gap-2 w-full sm:w-3/4 xl:w-1/2">
 	<TextInput name="block" datalist={chainEnds} autofocus />
 	<TextInput name="drop" placeholder="dropped item" datalist={chainStarts} />
-	<button type="submit" class="btn">add link</button>
+	<SubmitButton>add link</SubmitButton>
 	{#if error}
 		<p class="text-sm text-red-500">Error: {error}</p>
 	{/if}
 </form>
 
 <form class="relative mb-8 w-full sm:w-1/2 xl:w-1/4">
-	<TextInput name="search" placeholder="enter search term to filter" bind:value={search}></TextInput>
+	<TextInput name="search" placeholder="enter search term to filter" bind:value={search} />
 	<svg
 		class="w-4 absolute bottom-3 right-2 text-neutral-300"
 		aria-hidden="true"
@@ -65,11 +67,7 @@
 						<span>{item}</span>
 						<form method="post" action="?_method=DELETE" class="inline-block">
 							<input type="text" hidden name="item" value={item} />
-							<button
-								type="submit"
-								class="bg-white bg-opacity-20 hover:bg-red-600 transition duration-150 ease-in-out rounded-full"
-								>&#x2715;</button
-							>
+							<DeleteButton />
 						</form>
 					</div>
 				{/each}
@@ -85,13 +83,6 @@
 </main>
 
 <style>
-	section button {
-		width: 20px;
-		line-height: 20px;
-		font-size: x-small;
-		vertical-align: text-bottom;
-	}
-
 	section > div:first-child .arrow-l,
 	section > div:last-child .arrow-r {
 		display: none;
