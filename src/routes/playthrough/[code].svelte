@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DeleteButton from '$lib/components/DeleteButton.svelte';
+	import ChainItem from '$lib/components/ChainItem.svelte';
 	import SubmitButton from '$lib/components/SubmitButton.svelte';
 	import TextInput from '$lib/components/TextInput.svelte';
 
@@ -9,7 +9,7 @@
 
 	let search = '';
 
-	$: filtered = search && search.length > 2;
+	$: filtered = search !== '' && search.length > 2;
 	$: filteredChains = filtered
 		? chains.filter((chain) => chain.some((item) => item.includes(search)))
 		: chains;
@@ -53,23 +53,7 @@
 		<section class="flex flex-wrap gap-2 mb-6">
 			{#if chain}
 				{#each chain as item}
-					<div
-						class="p-2 pl-4 relative rounded shadow-lg hover:shadow-xl transition duration-150 ease-in-out bg-neutral-900 text-white whitespace-nowrap"
-						class:bg-yellow-600={filtered && item.includes(search)}
-					>
-						<div
-							class="arrow-l absolute left-0 top-3 border-solid border-l-white border-l-8 border-y-transparent border-y-8 border-r-0 transition duration-150 ease-in-out"
-						/>
-						<div
-							class="arrow-r absolute -right-2 top-3 border-solid border-l-neutral-900 border-l-8 border-y-transparent border-y-8 border-r-0 transition duration-150 ease-in-out"
-							class:border-l-yellow-600={filtered && item.includes(search)}
-						/>
-						<span>{item}</span>
-						<form method="post" action="?_method=DELETE" class="inline-block">
-							<input type="text" hidden name="item" value={item} />
-							<DeleteButton />
-						</form>
-					</div>
+					<ChainItem value={item} highlight={filtered && item.includes(search)} />
 				{/each}
 			{/if}
 		</section>
@@ -81,10 +65,3 @@
 		{/if}
 	{/each}
 </main>
-
-<style>
-	section > div:first-child .arrow-l,
-	section > div:last-child .arrow-r {
-		display: none;
-	}
-</style>
