@@ -27,15 +27,7 @@
 </form>
 
 <form class="relative mb-8 w-full sm:w-1/2 xl:w-1/4">
-	<label class="w-full">
-		<span>search</span>
-		<input
-			type="text"
-			placeholder="enter search term to filter"
-			bind:value={search}
-			class="w-full"
-		/>
-	</label>
+	<TextInput name="search" placeholder="enter search term to filter" bind:value={search}></TextInput>
 	<svg
 		class="w-4 absolute bottom-3 right-2 text-neutral-300"
 		aria-hidden="true"
