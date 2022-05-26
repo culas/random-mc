@@ -15,7 +15,7 @@
 <h2>Playthrough: {code}</h2>
 
 <form method="post" class="mb-8">
-	<label class="w-1/4 mr-2">
+	<label class="mr-2 mb-2 block w-full sm:inline-block sm:w-1/4">
 		<span>block</span>
 		<input
 			type="text"
@@ -26,11 +26,11 @@
 			class="w-full"
 		/>
 	</label>
-	<label class="w-1/4 mr-2">
+	<label class="mr-2 mb-2 block w-full sm:inline-block sm:w-1/4">
 		<span>drop</span>
 		<input type="text" name="drop" placeholder="dropped item" list="drop-datalist" class="w-full" />
 	</label>
-	<button type="submit">add link</button>
+	<button type="submit" class="btn">add link</button>
 </form>
 
 <datalist id="block-datalist">
@@ -45,7 +45,7 @@
 	{/each}
 </datalist>
 
-<form class="relative mb-8 w-1/4">
+<form class="relative mb-8 w-full sm:w-1/2 xl:w-1/4">
 	<label class="w-full">
 		<span>search</span>
 		<input
@@ -92,7 +92,11 @@
 						<span>{item}</span>
 						<form method="post" action="?_method=DELETE" class="inline-block">
 							<input type="text" hidden name="item" value={item} />
-							<button type="submit">X</button>
+							<button
+								type="submit"
+								class="bg-white bg-opacity-20 hover:bg-red-600 transition duration-150 ease-in-out rounded-full"
+								>&#x2715;</button
+							>
 						</form>
 					</div>
 				{/each}
@@ -109,14 +113,10 @@
 
 <style>
 	section button {
-		display: inline-block;
-		padding: 0;
 		width: 20px;
 		line-height: 20px;
 		font-size: x-small;
-		text-align: center;
-		border-radius: 100%;
-		background-color: rgba(255, 255, 255, 0.25);
+		vertical-align: text-bottom;
 	}
 
 	section > div:first-child .arrow-l,
