@@ -3,7 +3,7 @@
 </script>
 
 <p class="mb-4">
-	A helper to keep track of the item drops in your randomized Minecraft playthrough.
+	A helper to keep track of the item drops in your randomized Minecraft playthrough. Inspired by <a href="https://www.twitch.tv/osie">Osie's</a> streams based on the <a href="https://fasguy.net/minecraft_randomizer/">Minecraft Randomizer</a>.
 </p>
 
 <form method="post">
