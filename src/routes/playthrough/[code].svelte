@@ -20,16 +20,17 @@
 
 <h2>Playthrough: {code}</h2>
 
-<form method="post" class="mb-8 flex items-end gap-2 w-full sm:w-3/4 xl:w-1/2">
+<form method="post" class="flex items-end gap-2 w-full sm:w-3/4 xl:w-1/2">
 	<TextInput name="block" datalist={chainEnds} autofocus />
 	<TextInput name="drop" placeholder="dropped item" datalist={chainStarts} />
 	<SubmitButton>add link</SubmitButton>
-	{#if error}
-		<p class="text-sm text-red-500">Error: {error}</p>
-	{/if}
 </form>
 
-<form class="relative mb-8 w-full sm:w-1/2 xl:w-1/4">
+{#if error}
+	<p class="text-sm text-red-500">Error: {error}</p>
+{/if}
+
+<form class="relative my-8 w-full sm:w-1/2 xl:w-1/4">
 	<TextInput name="search" placeholder="enter search term to filter" bind:value={search} />
 	<SearchIcon />
 </form>
