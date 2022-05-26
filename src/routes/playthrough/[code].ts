@@ -34,7 +34,7 @@ export async function post({ params, request }: RequestEvent) {
 	if (!playthrough || !block || !drop) {
 		return {
 			status: 404,
-			body: { error: 'Invalid data' }
+			body: { error: !block ? 'Block not specified' : !drop ? 'Drop not specified' : 'Something went wrong fetching playthrough data' }
 		}
 	}
 
@@ -100,7 +100,7 @@ export async function del({ params, request }: RequestEvent) {
 	if (!playthrough || !itemToDelete) {
 		return {
 			status: 404,
-			body: { error: 'Invalid data' }
+			body: { error: !playthrough ? 'Playthrough not found' : 'No item to delete given' }
 		}
 	}
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let code: string;
 	export let chains: string[][];
+	export let error: string;
 
 	let search = '';
 
@@ -31,6 +32,9 @@
 		<input type="text" name="drop" placeholder="dropped item" list="drop-datalist" class="w-full" />
 	</label>
 	<button type="submit" class="btn">add link</button>
+	{#if error}
+		<p class="text-sm text-red-500">Error: {error}</p>
+	{/if}
 </form>
 
 <datalist id="block-datalist">

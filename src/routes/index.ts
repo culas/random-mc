@@ -4,7 +4,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 export async function post({ request }: RequestEvent) {
 	const playthrough = (await request.formData()).get('playthrough');
 	const code = idString(playthrough);
-	if (validCode(code)) {
+	if (code !== '') {
 		return {
 			status: 303,
 			headers: {
@@ -17,10 +17,4 @@ export async function post({ request }: RequestEvent) {
 			body: { error: 'No playthrough code provided' }
 		}
 	}
-}
-
-function validCode(code: any): boolean {
-	return (typeof code === 'string')
-		&& !code.includes(' ')
-		&& !code.includes('/');
 }

@@ -9,7 +9,6 @@ const options = {
 	useUnifiedTopology: true,
 	useNewUrlParser: true
 }
-console.log(uri);
 
 let client;
 let clientPromise: Promise<MongoClient>;
